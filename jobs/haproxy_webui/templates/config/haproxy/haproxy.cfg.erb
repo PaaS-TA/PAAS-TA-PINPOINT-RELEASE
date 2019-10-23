@@ -13,11 +13,9 @@ defaults
 
 frontend http-in
     mode http
-    bind *:<%= p('haproxy.http_port')%>
+    bind *:80
     default_backend servers
 
 backend servers
     mode http
-<% p('webui.host_names').each_with_index do |host_name, index| %>
-    server <%= host_name %> <%= p('webui.host_ips')[index] %>:8080
-<% end %>
+    server server-1 <%=link('pinpoint_web_link').instances[0].address %>:8080

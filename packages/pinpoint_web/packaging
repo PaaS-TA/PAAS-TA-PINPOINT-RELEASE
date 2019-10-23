@@ -1,0 +1,11 @@
+set -e
+
+archive="pinpoint_web/pinpoint-web-1.8.4.war"
+
+#COPY ARCHIVE
+if [[ -f $archive ]] ; then
+  cp $archive ${BOSH_INSTALL_TARGET}
+else
+  echo "Archive not found"
+  exit 1
+fi

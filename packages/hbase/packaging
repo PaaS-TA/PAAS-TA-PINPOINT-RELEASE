@@ -1,7 +1,7 @@
 set -e
 
-archive="hbase/hbase-1.2.1-bin.tar.gz"
-pkg_name="hbase-1.2.1"
+archive="hbase/hbase-1.2.7-bin.tar.gz"
+pkg_name="hbase-1.2.7"
 
 #UNPRESS ARCHIVE
 if [[ -f $archive ]] ; then

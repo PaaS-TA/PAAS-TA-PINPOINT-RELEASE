@@ -1,6 +1,7 @@
 ---
 name: collector
-dependencies: 
-- tomcat
+
+dependencies: []
+
 files:
-- collector/pinpoint-collector-1.6.0-SNAPSHOT.war
+- collector/pinpoint-collector-1.8.4.war

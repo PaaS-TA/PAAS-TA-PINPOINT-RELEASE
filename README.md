@@ -1,52 +1,31 @@
 # OpenPaaS PaaSTA Pinpoint Guide
 
 ## file download
-###1. hadoop
+###1. src
  
->`$ cd src`
- 
->`$ mkdir hadoop`
- 
->`$ cd hadoop`
- 
->`$ wget https://archive.apache.org/dist/hadoop/core/hadoop-2.5.2/hadoop-2.5.2.tar.gz`
- 
-###2. hbase
- 
->`$ cd src`
- 
->`$ cd hbase`
- 
->`$ wget https://archive.apache.org/dist/hbase/1.2.1/hbase-1.2.1-bin.tar.gz`
- 
-###3. java
- 
->`$ cd src`
- 
->`$ mkdir java`
- 
->`$ wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u77-b03/jdk-8u77-linux-x64.tar.gz`
+>`$ cd PAAS-TA-PINPOINT-RELEASE`
 
+>`$ mkdir src`
 
+>`$ cd src`
+  
+>`$ wget -O paasta-pinpoint-src.zip http://45.248.73.44/index.php/s/yr9JK7efeYEXExZ/download`
+
+>`$ rm -rf paasta-pinpoint-src.zip`
+ 
 
 ##1. Pinpoint Cluster Configuration
 - Hadoop master(=Hbase master) :: 1 machine
-- Hadoop secondary :: 1 machine
-- Hadoop slave(=Hbase regionserver) :: N machine(s)
 - Collector :: N machine(s)
 - HAproxy webui ::  1 machine
 - Webui :: N machine(s)
 - Agent :: N machine(s)
 
-##2. Deploy
->`$ cd $BOSH_RELEASE_DIR`
+##2. Create & Upload Release
+>`sh create.sh`
 
->`$ bosh deployment deployment/openpaas-paasta-pinpoint-cluster-release.yml`
+##3. deploy
+>`$ cd deployments/`
 
->`$ bosh deploy`
-
-##3. Run errand
-
-### After deploying
->`$ bosh run errand h_master_register`
+>`$ sh deploy_pinpoint-{IaaS}.sh`
 

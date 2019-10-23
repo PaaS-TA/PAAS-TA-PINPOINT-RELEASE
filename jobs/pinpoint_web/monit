@@ -1,0 +1,6 @@
+check process pinpoint_web
+with pidfile /etc/sv/monit/pinpoint_web.pid
+  start program "/var/vcap/packages/bosh-helpers/monit_debugger pinpoint_web_ctl '/var/vcap/jobs/pinpoint_web/bin/pinpoint_web_ctl start'"
+  stop program "/var/vcap/packages/bosh-helpers/monit_debugger pinpoint_web_ctl '/var/vcap/jobs/pinpoint_web/bin/pinpoint_web_ctl stop'"
+  group vcap
+

@@ -122,3 +122,4 @@ YARN_OPTS="$YARN_OPTS -Dyarn.policy.file=$YARN_POLICYFILE"
 #SET ENV
 export HADOOP_COMMON_LIB_NATIVE_DIR=${HADOOP_HOME}/lib/native
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
+export YARN_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true"

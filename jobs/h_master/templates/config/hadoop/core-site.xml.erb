@@ -20,13 +20,13 @@
     <property>
         <name>fs.default.name</name>
         # <value>hdfs://hadoop-master:9000</value>
-        <value>hdfs://<%= p('master.host_name') %>:<%= p('master.port') %></value>
+        <value>hdfs://HOSTNAME:9000</value>
         <final>true</final>
     </property>
 
     <property>
         <name>hadoop.tmp.dir</name>
-        <value>/var/vcap/data/hadoop-tmp</value>
+        <value>/var/vcap/data/hadoop-3.1.2/tmp</value>
     </property>
 
     <property>

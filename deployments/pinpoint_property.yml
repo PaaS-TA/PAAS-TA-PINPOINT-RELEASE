@@ -1,0 +1,26 @@
+#!/bin/bash
+
+---
+### On-Demand Bosh Deployment Name Setting ###
+deployment_name: paasta-pinpoint-service                       #On-Demand Deployment Name
+#
+#### Main Stemcells Setting ###
+stemcell_os: ubuntu-xenial                                      # Deployment Main Stemcell OS
+stemcell_version: latest                                       # Main Stemcell Version
+stemcell_alias: default                                         # Main Stemcell Alias
+#
+#
+#### VM Type
+mariadb_vm_type: default
+#broker_vm_type: service_medium
+#service_vm_type: service_tiny
+#test_vm_type: service_tiny
+#
+#### On-Demand Release Deployment Setting ### 
+releases_name :  paasta-pinpoint-release                              # On-Demand Release Name
+internal_networks_name : default                        # Some Network From Your 'bosh cloud-config(cc)'
+external_networks_name : vip
+haproxy_public_ip : xx.xxx.xxx.xxx 
+mariadb_disk_type : 30GB # MariaDB Disk Type 'bosh cloud-config(cc)'
+PemSSH : true
+#

@@ -1,26 +1,25 @@
 ---
 name: h_master
 packages:
-  - bosh-helpers
-  - ssh-keys  
   - java
   - hadoop
+  - bosh-helpers
   - hbase
 
 templates:
+  bin/pre-start.erb: bin/pre-start
   bin/h_master_ctl.erb: bin/h_master_ctl
+  bin/private_key.pem.erb: bin/private_key.pem
+  bin/config.erb: bin/config
+  data/properties.sh.erb: data/properties.sh
+  bin/monit_debugger: bin/monit_debugger
+  config/hadoop/hdfs-site.xml.erb: config/hadoop/hdfs-site.xml
   config/hadoop/core-site.xml.erb: config/hadoop/core-site.xml
   config/hadoop/hadoop-env.sh: config/hadoop/hadoop-env.sh
-  config/hadoop/hdfs-site.xml.erb: config/hadoop/hdfs-site.xml
   config/hadoop/mapred-site.xml.erb: config/hadoop/mapred-site.xml
   config/hadoop/slaves.erb: config/hadoop/slaves
   config/hadoop/yarn-env.sh: config/hadoop/yarn-env.sh
   config/hadoop/yarn-site.xml.erb: config/hadoop/yarn-site.xml
-  config/hbase/hbase-env.sh: config/hbase/hbase-env.sh
-  config/hbase/hbase-site.xml.erb: config/hbase/hbase-site.xml
-  config/hbase/regionservers.erb: config/hbase/regionservers
-  data/properties.sh.erb: data/properties.sh
-  etc/hosts.erb: etc/hosts
   config/hadoop/capacity-scheduler.xml: config/hadoop/capacity-scheduler.xml
   config/hadoop/configuration.xsl: config/hadoop/configuration.xsl
   config/hadoop/container-executor.cfg: config/hadoop/container-executor.cfg
@@ -40,45 +39,35 @@ templates:
   config/hadoop/ssl-client.xml.example: config/hadoop/ssl-client.xml.example
   config/hadoop/ssl-server.xml.example: config/hadoop/ssl-server.xml.example
   config/hadoop/yarn-env.cmd: config/hadoop/yarn-env.cmd
-  config/hbase/hadoop-metrics2-hbase.properties: config/hbase/hadoop-metrics2-hbase.properties
-  config/hbase/hbase-env.cmd: config/hbase/hbase-env.cmd
-  config/hbase/hbase-policy.xml: config/hbase/hbase-policy.xml
-  config/hbase/log4j.properties: config/hbase/log4j.properties
+  config/hbase/hbase-env.sh: config/hbase/hbase-env.sh
+  config/hbase/hbase-site.xml.erb: config/hbase/hbase-site.xml
+  config/hbase/regionservers.erb: config/hbase/regionservers
+  config/hadoop/workers.erb: config/hadoop/workers
+  ssh/authorized_keys: ssh/authorized_keys
+  ssh/id_rsa: ssh/id_rsa
+  ssh/id_rsa.pub: ssh/id_rsa.pub 
 
+consumes:
+  - name: h_master_link
+    type: h_master
+
+provides:
+  - name: h_master_link
+    type: h_master
+    properties: 
+    - pem_key
+    - PemSSH
 properties:
-  master.host_name:
-    description: Master host name
-  master.host_ip:
-    description: Master host ip
-  master.port:
-    description: Master port
-    default: 9000
-  master.http_port:
-    description: Master http port
-    default: 50070
+  pem_key:
+    description: ssh tunnel key
+  PemSSH:
+    description: ssh PemKey use or not
   master.replication:
     description: Master replication
     default: 3
   master.tcp_listen_port:
     description: Master tcp listen port
     default: 29994
-  master.udp_stat_listen_port:
-    description: Master udp stat listen port
-    default: 29995
-  master.udp_span_listen_port:
-    description: Master udp span listen port
-    default: 29996
-  secondary.host_name:
-    description: Secondary host name
-  secondary.host_ip:
-    description: Secondary host ip
-  secondary.http_port:
-    description: Secondary host http port
-    default: 50090
-  yarn.host_name:
-    description: Yarn host name
-  yarn.host_ip:
-    description: Yarn host ip
   yarn.resource_tracker_port:
     description: Yarn resource tracker port
     default: 8025
@@ -88,22 +77,3 @@ properties:
   yarn.resourcemanager_port:
     description: Yarn resourcemanager port
     default: 8040
-  slave.host_names:
-    description: Slave host names(array)
-  slave.host_ips:
-    description: Slave host ips(array)
-  collector.host_names:
-    description: Collector host names(array)
-  collector.host_ips:
-    description: Collector host ips(array)
-  haproxy.host_name:
-    description: Haproxy host name
-  haproxy.host_ip:
-    description: Haproxy host ip
-  haproxy.http_port:
-    description: Haproxy http port
-    default: 8080
-  webui.host_names:
-    description: Webui host names(array)
-  webui.host_ips:
-    description: Webui host ips(array)

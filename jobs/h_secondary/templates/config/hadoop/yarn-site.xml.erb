@@ -27,24 +27,24 @@
     <property>
         <name>yarn.resourcemanager.resource-tracker.address</name>
         # <value>hadoop-master:8025</value>
-        <value><%= p('yarn.host_name') %>:<%= p('yarn.resource_tracker_port') %></value>
+        <value>HOSTNAME:<%= p('yarn.resource_tracker_port') %></value>
     </property>
 
     <property>
         <name>yarn.resourcemanager.scheduler.address</name>
         # <value>hadoop-master:8030</value>
-        <value><%= p('yarn.host_name') %>:<%= p('yarn.scheduler_port') %></value>
+        <value>HOSTNAME:<%= p('yarn.scheduler_port') %></value>
     </property>
 
     <property>
         <name>yarn.resourcemanager.address</name>
         # <value>hadoop-master:8040</value>
-        <value><%= p('yarn.host_name') %>:<%= p('yarn.resourcemanager_port') %></value>
+        <value>HOSTNAME:<%= p('yarn.resourcemanager_port') %></value>
     </property>
 
     <property>
         <name>yarn.nodemanager.local-dirs</name>
-        <value>/var/vcap/data/hadoop-tmp/nm-local-dir</value>
+        <value>/var/vcap/data/hadoop-3.1.2/nm-local-dir</value>
         <final>true</final>
     </property>
 </configuration>

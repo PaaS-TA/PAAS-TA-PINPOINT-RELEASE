@@ -1,6 +1,6 @@
 set -e
 
-archive="hadoop/hadoop-2.5.2.tar.gz"
+archive="hadoop/hadoop-3.1.2.tar.gz"
 
 #UNPRESS ARCHIVE
 if [[ -f $archive ]] ; then
@@ -11,8 +11,8 @@ else
 fi
 
 #COPY ARCHIVE
-if [[ -d hadoop-2.5.2/bin ]]; then
-  cp -a hadoop-2.5.2/* ${BOSH_INSTALL_TARGET}
+if [[ -d hadoop-3.1.2/bin ]]; then
+  cp -a hadoop-3.1.2/* ${BOSH_INSTALL_TARGET}
   chmod 755 ${BOSH_INSTALL_TARGET}/*
 else
   echo "HADOOP is not properly packaged"

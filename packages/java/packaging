@@ -1,10 +1,10 @@
 set -e
 
-pkg_name="jdk1.8.0_77"
+pkg_name="jdk1.8.0_221"
 
 #CHECK OS
 if [[ `uname -a` =~ "x86_64" ]] ; then
-  archive="java/jdk-8u77-linux-x64.tar.gz"
+  archive="java/jdk-8u221-linux-x64.tar.gz"
 else
   echo "Only 64-bit architectures are supported."
   exit 1

@@ -8,13 +8,6 @@ export JOB_NAME='haproxy_webui'
 source /var/vcap/packages/bosh-helpers/ctl_setup.sh $JOB_NAME
 export PID_FILE=$RUN_DIR/$JOB_NAME.pid
 
-#SET hostname
-echo <%= p('haproxy.host_name') %> > /etc/hostname
-/bin/hostname -F /etc/hostname
-
-#SET HOSTS
-cp -a $JOB_DIR/etc/hosts /etc/hosts
-
 case $1 in
 
   start)

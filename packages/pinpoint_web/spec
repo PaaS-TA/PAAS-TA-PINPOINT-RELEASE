@@ -1,0 +1,6 @@
+---
+name: pinpoint_web 
+dependencies: 
+- tomcat
+files:
+- pinpoint_web/pinpoint-web-1.8.4.war

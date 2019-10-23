@@ -1,0 +1,107 @@
+# paasta-pinpoint-vsphere 설정 파일 내용
+name: "((deployment_name))"                           # 서비스 배포이름(필수)
+
+update:
+  canaries: 1                            # canary 인스턴스 수(필수)
+  canary_watch_time: 120000              # canary 인스턴스가 수행하기 위한 대기 시간(필수)
+  update_watch_time: 120000              # non-canary 인스턴스가 수행하기 위한 대기 시간(필수)
+  max_in_flight: 8                       # non-canary 인스턴스가 병렬로 update 하는 최대 개수(필수)
+
+stemcells:
+- alias: "((stemcell_alias))"
+  os: "((stemcell_os))"
+  version: "((stemcell_version))"
+
+releases:
+- name: "((releases_name))"                  # 서비스 릴리즈 이름(필수) bosh releases로 확인 가능
+  version: "1.0"                                             # 서비스 릴리즈 버전(필수):latest 시 업로드된 서비스 릴리즈 최신버전
+
+instance_groups:
+- name: h_master                          #작업 이름(필수)
+  azs:
+  - z3
+  instances: 1                            # job 인스턴스 수(필수)
+  vm_type: "((mariadb_vm_type))"
+  stemcell: "((stemcell_alias))"
+  persistent_disk_type: "((mariadb_disk_type))"
+  networks:                               # 네트워크 구성정보          
+  - name: "((internal_networks_name))"                         # Networks block에서 선언한 network 이름(필수)
+  jobs:
+  - name: h_master
+    release: "((releases_name))"
+  syslog_aggregator: null
+  properties:
+    pem_key: ((pem_key))
+    PemSSH: ((PemSSH))
+
+- name: collector                          #작업 이름(필수)
+  azs:
+  - z3
+  instances: 1                            # job 인스턴스 수(필수)
+  vm_type: "((mariadb_vm_type))"
+  stemcell: "((stemcell_alias))"
+  persistent_disk_type: "((mariadb_disk_type))"
+  networks:                               # 네트워크 구성정보          
+  - name: "((internal_networks_name))"                         # Networks block에서 선언한 network 이름(필수)
+  jobs:
+  - name: collector 
+    release: "((releases_name))"
+  syslog_aggregator: null
+
+- name: pinpoint_web                          #작업 이름(필수)
+  azs:
+  - z3
+  instances: 1                            # job 인스턴스 수(필수)
+  vm_type: "((mariadb_vm_type))"
+  stemcell: "((stemcell_alias))"
+  persistent_disk_type: "((mariadb_disk_type))"
+  networks:                               # 네트워크 구성정보          
+  - name: "((internal_networks_name))"                         # Networks block에서 선언한 network 이름(필수)
+  jobs:
+  - name: pinpoint_web
+    release: "((releases_name))"
+  syslog_aggregator: null
+
+- name: broker                          #작업 이름(필수)
+  azs:
+  - z3
+  instances: 1                            # job 인스턴스 수(필수)
+  vm_type: "((mariadb_vm_type))"
+  stemcell: "((stemcell_alias))"
+  persistent_disk_type: "((mariadb_disk_type))"
+  networks:                               # 네트워크 구성정보          
+  - name: "((internal_networks_name))"                         # Networks block에서 선언한 network 이름(필수)
+  jobs:
+  - name: broker
+    release: "((releases_name))"
+  syslog_aggregator: null
+
+- name: haproxy_webui                          #작업 이름(필수)
+  azs:
+  - z7
+  instances: 1                            # job 인스턴스 수(필수)
+  vm_type: "((mariadb_vm_type))"
+  stemcell: "((stemcell_alias))"
+  persistent_disk_type: "((mariadb_disk_type))"
+  networks:                               # 네트워크 구성정보          
+  - name: "((internal_networks_name))"                         # Networks block에서 선언한 network 이름(필수)
+  - name: "((external_networks_name))"
+    static_ips: "((haproxy_public_ip))"
+  jobs:
+  - name: haproxy_webui
+    release: "((releases_name))"
+  syslog_aggregator: null
+
+properties:                                # Pinpoint 설정정보
+  master:                                  # Pinpoint master 설정정보
+    replication: 1                         # Pinpoint master 복제개수
+    tcp_listen_port: 29994                 # Pinpoint master tcp port
+  broker:                                  # Pinpoint broker 설정정보
+    collector_tcp_port: 29994              # Pinpoint collector tcp port 설정정보
+    collector_stat_port: 29995             # Pinpoint collector stat port 설정정보
+    collector_span_port: 29996             # Pinpoint collector span port 설정정보
+    dashboard_uri: http://((haproxy_public_ip)):80/#/main   # Pinpoint dashboard url 설정정보
+  yarn:                                    # Pinpoint yarn 설정정보      
+    resource_tracker_port: 8025            # Pinpoint yarn resource_tracker_port
+    scheduler_port: 8030                   # Pinpoint yarn scheduler_port
+    resourcemanager_port: 8040             # Pinpoint yarn resourcemanager_port

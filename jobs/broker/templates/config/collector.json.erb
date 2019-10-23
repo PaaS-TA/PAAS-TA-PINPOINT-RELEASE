@@ -1,9 +1,9 @@
 [
   {
     "dashboard_url": "<%= p('broker.dashboard_uri')%>",
-    "collector_ips": <%= p('broker.collector_ips')%>,
-    "collector_span_port": "<%= p('broker.collector_span_port')%>",
-    "collector_stat_port": "<%= p('broker.collector_stat_port')%>",
-    "collector_tcp_port": "<%= p('broker.collector_tcp_port')%>"
+    "collector_ips": ["<%=link('collector_link').instances[0].address %>"],
+    "collector_span_port": "<%= link('collector_link').p('broker.collector_span_port')%>",
+    "collector_stat_port": "<%= link('collector_link').p('broker.collector_stat_port')%>",
+    "collector_tcp_port": "<%= link('collector_link').p('broker.collector_tcp_port')%>"
   }
 ]

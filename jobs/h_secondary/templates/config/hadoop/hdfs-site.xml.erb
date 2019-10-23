@@ -18,21 +18,25 @@
 
 <configuration>
     <property>
-        <name>dfs.replication</name>
-        # <value>9</value>
-        <value><%= p('master.replication') %></value>
+       <name>dfs.replication</name>
+       <value><%= p('master.replication') %></value>
     </property>
 
     <property>
-        # <name>dfs.hadoop-master.name.dir</name>
-        <name>dfs.<%= p('master.host_name') %>.name.dir</name>
-        <value>file:/var/vcap/data/hadoop-2.5.2/work/name</value>
+       <name>dfs.HOSTNAME.name.dir</name>
+       <value>file:/var/vcap/data/hadoop-3.1.2/work/name</value>
+       <final>true</final>
+    </property>
+
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:/var/vcap/data/hadoop-3.1.2/work/name</value>
         <final>true</final>
     </property>
 
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:/var/vcap/data/hadoop-2.5.2/work/data</value>
+        <value>file:/var/vcap/data/hadoop-3.1.2/work/data</value>
     </property>
 
     <property>
@@ -41,20 +45,13 @@
     </property>
 
     <property>
-        # <name>dfs.hadoop-master.checkpoint.dir</name>
-        <name>dfs.<%= p('master.host_name') %>.checkpoint.dir</name>
-        <value>file:/var/vcap/data/hadoop-2.5.2/work/namesecondary</value>
+        <name>dfs.HOSTNAME.checkpoint.dir</name>
+        <value>file:/var/vcap/data/hadoop-3.1.2/work/namesecondary</value>
     </property>
 
     <property>
         <name>dfs.http.address</name>
-        # <value>hadoop-master:50070</value>
-        <value><%= p('master.host_name') %>:<%= p('master.http_port') %></value>
+        <value>HOSTNAME:50070</value>
     </property>
 
-    <property>
-        <name>dfs.secondary.http.address</name>
-        # <value>hadoop-master:50090</value>
-        <value><%= p('secondary.host_name') %>:<%= p('secondary.http_port') %></value>
-    </property>
 </configuration>

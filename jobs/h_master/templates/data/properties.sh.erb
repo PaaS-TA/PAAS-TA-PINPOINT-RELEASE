@@ -18,9 +18,16 @@ export HBASE_HOME=$PKG_DIR/hbase
 export HBASE_CONF_DIR=$PKG_DIR/hbase/conf
 export PATH=$PATH:$HBASE_HOME/bin
 
+
 export HADOOP_LOG_DIR=$LOG_DIR
 export HADOOP_PID_DIR=$RUN_DIR
-export HDFS_USER=root
-export HADOOP_HDFS_USER=root
-export HADOOP_GROUP=root
-export DFS_NAME_DIR=/var/vcap/data/hadoop-2.5.2
+export HADOOP_HEAPSIZE_MAX=1g
+export HADOOP_NAMENODE_OPTS="-Xmx5g"
+export HDFS_USER=vcap
+export HADOOP_HDFS_USER=vcap
+export HADOOP_GROUP=vcap
+export DFS_NAME_DIR=/var/vcap/data/hadoop-3.1.2
+export YARN_HOME=$HADOOP_HOME
+export YARN_CONF_DIR=$PKG_DIR/hadoop/etc/hadoop
+export YARN_LOG_DIR=$LOG_DIR
+

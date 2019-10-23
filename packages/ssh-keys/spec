@@ -1,4 +1,0 @@
----
-name: ssh-keys
-files:
-- ssh-keys/*
