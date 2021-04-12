@@ -12,6 +12,10 @@ PINPOINT_WEB_CONFIG="${JOB_DIR}/data/pinpoint-web.properties"
 VENDOR="${JOB_DIR}/data/vendor.css"
 hostnamectl set-hostname <%=link('pinpoint_web_link').address %>
 source /var/vcap/jobs/${JOB_NAME}/bin/ctl_common.sh ${JOB_NAME}
+
+#CVE
+sed -i -e 's/<\/web-app>/    <security-constraint>\n      <web-resource-collection>\n        <web-resource-name>Restricted methods<\/web-resource-name>\n        <url-pattern>\/*<\/url-pattern>\n        <http-method>OPTIONS<\/http-method>\n      <\/web-resource-collection>\n      <auth-constraint \/>\n    <\/security-constraint>\n<\/web-app>/g' /var/vcap/packages/tomcat/conf/web.xml
+
 #COMMON INIT
 common_init
 case $1 in

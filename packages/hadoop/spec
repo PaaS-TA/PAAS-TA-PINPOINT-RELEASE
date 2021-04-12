@@ -1,6 +1,0 @@
----
-name: hadoop
-dependencies: 
-- java
-files:
-- hadoop/hadoop-3.1.2.tar.gz

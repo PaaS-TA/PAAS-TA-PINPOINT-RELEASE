@@ -23,36 +23,30 @@
 <configuration>
     <property>
         <name>hbase.rootdir</name>
-        <value>hdfs://HOSTNAME:9000/hbase</value>
+	<value>file:///var/vcap/packages/hbase/hbase_data</value>
     </property>
+
     <property>
         <name>hbase.master</name>
         <value>HOSTNAME:60000</value>
     </property>
+
     <property>
         <name>hbase.zookeeper.quorum</name>
         <value>HOSTNAME</value>
     </property>
+
     <property>
         <name>hbase.zookeeper.property.dataDir</name>
         <value>/var/vcap/data/zookeeper-data</value>
     </property>
+
+
     <property>
         <name>hbase.cluster.distributed</name>
-        <value>true</value>
-    </property>
-    <property>
-        <name>dfs.support.append</name>
-        <value>true</value>
-    </property>
-    <property>
-        <name>dfs.datanode.max.xcievers</name>
-        <value>4096</value>
-    </property>
-    <property>
-        <name>hbase.netty.nativetransport</name>
         <value>false</value>
     </property>
+
     <property>
         <name>hbase.unsafe.stream.capability.enforce</name>
         <value>false</value>

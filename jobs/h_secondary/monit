@@ -1,5 +1,0 @@
-check process h_secondary
-  with pidfile /var/vcap/sys/run/h_secondary/h_secondary.pid
-  start program "/var/vcap/jobs/h_secondary/bin/monit_debugger h_secondary_ctl '/var/vcap/jobs/h_secondary/bin/h_secondary_ctl start'"
-  stop program "/var/vcap/jobs/h_secondary/bin/monit_debugger h_secondary_ctl '/var/vcap/jobs/h_secondary/bin/h_secondary_ctl stop'"
-  group vcap
