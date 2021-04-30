@@ -13,6 +13,7 @@ templates:
   data/pinpoint-web.properties.erb: data/pinpoint-web.properties
   bin/ctl_common.sh: bin/ctl_common.sh
   data/vendor.css: data/vendor.css
+  bin/post-deploy.erb : bin/post-deploy
 provides:
   - name: pinpoint_web_link
     type: pinpoint_web
@@ -24,6 +25,9 @@ consumes:
     type: pinpoint_web
 
 properties:
+  cce_enable:
+    description: CCE config
+    default: false
   master.host_name:
     description: Master host name
   master.host_ip:
@@ -34,12 +38,6 @@ properties:
   master.http_port:
     description: Master http port
     default: 50070
-  master.replication:
-    description: Master replication
-    default: 3
-  master.tcp_listen_port:
-    description: Master tcp listen port
-    default: 29994
   master.udp_stat_listen_port:
     description: Master udp stat listen port
     default: 29995
@@ -57,15 +55,6 @@ properties:
     description: Yarn host name
   yarn.host_ip:
     description: Yarn host ip
-  yarn.resource_tracker_port:
-    description: Yarn resource tracker port
-    default: 8025
-  yarn.scheduler_port:
-    description: Yarn scheduler port
-    default: 8030
-  yarn.resourcemanager_port:
-    description: Yarn resourcemanager port
-    default: 8040
   slave.host_names:
     description: Slave host names(array)
   slave.host_ips:

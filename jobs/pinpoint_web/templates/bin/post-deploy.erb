@@ -1,0 +1,7 @@
+#!/bin/bash
+<% if p("cce_enable") %>
+chmod -R 644 /var/vcap/packages/tomcat/webapps
+chmod 755 /var/vcap/packages/tomcat/webapps
+chmod 755 /var/vcap/packages/tomcat/webapps/manager
+chmod 755 /var/vcap/packages/tomcat/webapps/ROOT
+<% end %>

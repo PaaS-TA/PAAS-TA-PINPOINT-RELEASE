@@ -5,13 +5,9 @@
  
 >`$ cd PAAS-TA-PINPOINT-RELEASE`
 
->`$ mkdir src`
+>`$ wget -O src.zip https://nextcloud.paas-ta.org/index.php/s/maMHWJeDRgHnbyi/download`
 
->`$ cd src`
-  
->`$ wget -O paasta-pinpoint-src.zip http://45.248.73.44/index.php/s/yr9JK7efeYEXExZ/download`
-
->`$ rm -rf paasta-pinpoint-src.zip`
+>`$ unzip src.zip`
  
 
 ##1. Pinpoint Cluster Configuration
@@ -23,9 +19,3 @@
 
 ##2. Create & Upload Release
 >`sh create.sh`
-
-##3. deploy
->`$ cd deployments/`
-
->`$ sh deploy_pinpoint-{IaaS}.sh`
-

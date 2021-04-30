@@ -12,6 +12,7 @@ templates:
   data/hbase.properties.erb: data/hbase.properties
   data/pinpoint-collector.properties.erb: data/pinpoint-collector.properties
   bin/ctl_common.sh: bin/ctl_common.sh
+  bin/post-deploy.erb : bin/post-deploy
 provides:
   - name: collector_link
     type: collector
@@ -27,6 +28,9 @@ consumes:
     type: collector
 
 properties:
+  cce_enable:
+    description: CCE config
+    default: false
   broker.collector_span_port:
     description: Master host name
     default: 29996
