@@ -1,7 +1,7 @@
 set -e
 
-archive="tomcat/apache-tomcat-8.5.64.tar.gz"
-pkg_name="apache-tomcat-8.5.64"
+archive="tomcat/apache-tomcat-8.5.78.tar.gz"
+pkg_name="apache-tomcat-8.5.78"
 
 #UNPRESS ARCHIVE
 if [[ -f $archive ]] ; then
