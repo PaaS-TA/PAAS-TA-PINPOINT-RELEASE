@@ -75,7 +75,7 @@
 ## src file download
 ```
 $ cd PAAS-TA-PINPOINT-RELEASE
-$ wget -O src.zip https://nextcloud.paas-ta.org/index.php/s/D6KzZqeYTyjdmWM/download
+$ wget -O src.zip https://nextcloud.paas-ta.org/index.php/s/sQXRWKpqNPb65iX/download
 $ unzip src.zip
 ```
 
