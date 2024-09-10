@@ -25,7 +25,12 @@ case $1 in
       chmod 755 -R $DFS_NAME_DIR
     fi
 
-    
+    owner=`ls -l $DFS_NAME_DIR/../ | grep hadoop | awk '{print $3}'`  
+    echo "owner=$owner"
+    if [ $owner = 'root' ]; then 
+      echo "changing owner $DFS_NAME_DIR"
+      chown vcap:vcap $DFS_NAME_DIR  
+    fi    
 
     #SET HADOOP NAMENODE
     if [ -d $PKG_DIR/hadoop/bin ]; then
@@ -57,7 +62,7 @@ case $1 in
 
     sleep 60s
 
-        #START HBASE MASTER
+    #START HBASE MASTER
     if [ -d $PKG_DIR/hbase/bin/ ]; then
       echo "Start-Hbase"
       su vcap -c '$PKG_DIR/hbase/bin/start-hbase.sh >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log &'
@@ -74,12 +79,30 @@ case $1 in
     ;;
 
   stop)
-    echo "Stopping SECONDARY ..."
     #STOP hbase
+    echo "Stopping Hbase"
+    if [ -d $PKG_DIR/hbase/bin/ ]; then
+      echo "Stopping Hbase"
+      su vcap -c '$PKG_DIR/hbase/bin/stop-hbase.sh >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log &'
+      echo "Stopped Hbase"
+    else
+      echo "FAIL :: STOP HBASE MASTER ..."
+      exit 1
+    fi
+
     rm -rf $HOME/data/zookeeper-data
 
     #STOP hadoop
-    $PKG_DIR/hadoop/sbin/stop-all.sh > /dev/null &
+    #$PKG_DIR/hadoop/sbin/stop-all.sh > /dev/null &
+    if [ -d $PKG_DIR/hadoop/sbin ]; then
+      echo "Stopping HADOOP-All"
+      su vcap -c '$PKG_DIR/hadoop/sbin/stop-all.sh >>$LOG_DIR/$JOB_NAME.stdout.log 2>>$LOG_DIR/$JOB_NAME.stderr.log &'
+      echo "Stopped HADOOP-All"
+    else
+      echo "FAIL :: STOP HADOOP ..."
+      exit 1
+    fi
+
     rm -rf $DFS_NAME_DIR
 
     kill_and_wait $PID_FILE
