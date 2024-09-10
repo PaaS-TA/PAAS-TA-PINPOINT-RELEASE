@@ -25,8 +25,7 @@ case $1 in
       chmod 755 -R $DFS_NAME_DIR
     fi
 
-    owner=`ls -l $DFS_NAME_DIR/../ | grep hadoop | awk '{print $3}'`  
-    echo "owner=$owner"
+    owner=`ls -ld $DFS_NAME_DIR/ | awk '{print $3}'`  
     if [ $owner = 'root' ]; then 
       echo "changing owner $DFS_NAME_DIR"
       chown vcap:vcap $DFS_NAME_DIR  
